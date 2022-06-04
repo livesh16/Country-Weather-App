@@ -7,8 +7,6 @@ const App = () => {
   const [filter, setFilter] = useState(false)
   const [capital, setCapital] = useState('Paris')
   const [tmp, setTmp] = useState()
-  const [lat, setLat] = useState(0)
-  const [long, setLong] = useState(0)
 
     useEffect(() => {
         console.log('effect')    
@@ -28,7 +26,7 @@ const App = () => {
           console.log('promise fulfilled')        
           setTmp(response.data)
       })
-  }, [lat, long])
+  }, [capital]) // when the state capital changes this useEffect will get rerun
 
     const handleInput = (event) => {
       const s = event.target.value
@@ -56,8 +54,6 @@ const App = () => {
 
       else if (countriesToShow.length === 1) {
         var languages = countriesToShow[0].languages
-        setLat(countriesToShow[0]["latlng"][0])
-        setLong(countriesToShow[0]["latlng"][1])
         setCapital(countriesToShow[0].capital[0])
         return (
           <div>
@@ -87,12 +83,6 @@ const App = () => {
               <div> 
               Wind {tmp.wind.speed}
               </div>
-
-            
-              
-
-              
-  
           </div>
         )
       }
@@ -127,8 +117,5 @@ const App = () => {
 
   )
 }
-
-
- 
 
 export default App
